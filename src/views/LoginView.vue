@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
+import PrimaryBtn from '@/components/PrimaryBtn.vue'
 
 const router = useRouter()
 
@@ -44,29 +45,39 @@ const login = async () => {
 
       <p style="color:red" v-if="error">{{ error }}</p>
 
-      <button :disabled="loading">Entrar</button>
+      <PrimaryBtn :disabled="loading">Entrar</PrimaryBtn>
     </form>
   </div>
 </template>
 
 <style>
 .container {
-  width: 400px;
-  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin: 0 auto;
+  padding: 50px;
+  border-radius: 20px;
   background: #222;
-  padding: 20px;
-  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
+
+h1 {
+  color: #E0DD7A;
+  text-align: center;
+  font-family: 'Freshie Personal Use', sans-serif;
+  font-size: 48px;
+  font-weight: bolder;
+}
+
 input {
   width: 100%;
   margin: 8px 0;
   padding: 10px;
+  border-radius: 12px;
 }
-button {
-  width: 100%;
-  padding: 12px;
-  background: green;
-  color: white;
-  margin-top: 10px;
-}
+
 </style>

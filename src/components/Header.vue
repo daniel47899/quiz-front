@@ -1,13 +1,15 @@
 <template>
     <header class="header">
-      <div class="logo">Quiz App</div>
+      <div class="logo">Scoop Quiz</div>
   
       <nav class="navigation">
-        <button @click="goToLogin">Login</button>
+        <button type="button" @click="goToLogin"class="text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-base text-sm px-4 py-2.5 text-center leading-5">Login</button>
         <button @click="goToRegister">Registrar</button>
       </nav>
     </header>
   </template>
+  
+
   
   <script setup>
   import { useRouter } from "vue-router";
@@ -22,8 +24,13 @@
     router.push("/register");
   }
   </script>
+
+  
   
   <style scoped>
+
+@import url('https://fonts.cdnfonts.com/css/trafit-personal-use');
+
   .header {
     position: fixed; /* Fica no topo */
     top: 0;
@@ -35,19 +42,32 @@
     justify-content: space-between;
     align-items: center;
   
-    padding: 16px 24px;
+    padding: 18px;
     background-color: #222;
     color: white;
   }
   
   .logo {
-    font-size: 22px;
+    margin-left: 16px;
+    font-size: 46px;
     font-weight: bold;
+    font-family: 'Trafit Personal Use', sans-serif;
   }
   
+.navigation {
+    display: flex;
+    gap: 12px;
+    margin-right: 50px;
+}
+
+
   .navigation button {
-    margin-left: 12px;
-    padding: 8px 16px;
+    gap: 12px;
+    background-color: #4C5DAA;
+    color: white;
+    padding: 14px 24px;
+    font-weight: bold;
+    font-size: 18px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
