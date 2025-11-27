@@ -12,7 +12,7 @@ import Header from '../components/Header.vue'
       </h1>
       <p>Exercite sua mente com um clique</p>
             <div className="pt-8">
-              <Button>
+              <Button @click="$router.push('/login')">
                 Começar agora
                 <ArrowRight/>
               </Button>
@@ -40,7 +40,7 @@ import Header from '../components/Header.vue'
 }
 
 .home-content h1 {
-  font-size: 60px;
+  font-size: 70px;
   color: #E0DD7A;
   font-family: 'Freshie Personal Use', sans-serif;
   font-weight: bolder;
@@ -48,7 +48,7 @@ import Header from '../components/Header.vue'
 }
 
 .home-content p {
-  font-size: 35px;
+  font-size: 45px;
   font-family: 'Freshie Personal Use', sans-serif;
   font-style: italic;
   text-align: center;

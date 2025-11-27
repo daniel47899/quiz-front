@@ -2,7 +2,11 @@
 import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import MainHeader from "@/components/MainHeader.vue";
+</script>
 
+
+<script>
 const router = useRouter();
 const user = ref(null);
 
@@ -46,15 +50,13 @@ async function logout() {
 </script>
 
 <template>
+  <MainHeader/>>
   <div class="dashboard-container">
-    <h1>Dashboard</h1>
 
     <p v-if="user">Bem-vindo, <strong>{{ user.name }}</strong>!</p>
 
     <div class="options">
       <button @click="router.push('/quiz')">Iniciar Quiz</button>
-      <button @click="router.push('/ranking')">Ver Ranking</button>
-      <button class="logout" @click="logout">Logout</button>
     </div>
   </div>
 </template>
