@@ -34,7 +34,7 @@ import Header from '../components/Header.vue'
 }
 
 .home-content{
-  margin-top: 300px;
+  margin-top: 200px;
   text-align: center;
   color: white;
 }

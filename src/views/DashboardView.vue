@@ -3,6 +3,9 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import MainHeader from "@/components/MainHeader.vue";
+import RankingTable from "./RankingTable.vue";
+import PrimaryBtn from "@/components/PrimaryBtn.vue";
+
 </script>
 
 
@@ -10,7 +13,6 @@ import MainHeader from "@/components/MainHeader.vue";
 const router = useRouter();
 const user = ref(null);
 
-// Buscar dados do usuário logado
 onMounted(async () => {
   try {
     const response = await axios.get("http://localhost:8000/api/me", {
@@ -49,14 +51,17 @@ async function logout() {
 }
 </script>
 
+
 <template>
   <MainHeader/>>
   <div class="dashboard-container">
 
+     <RankingTable />
+
     <p v-if="user">Bem-vindo, <strong>{{ user.name }}</strong>!</p>
 
     <div class="options">
-      <button @click="router.push('/quiz')">Iniciar Quiz</button>
+      <PrimaryBtn @click="router.push('/quiz')">Iniciar Quiz</PrimaryBtn>
     </div>
   </div>
 </template>

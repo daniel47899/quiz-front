@@ -80,10 +80,9 @@ async function logout() {
 .main-header {
   max-width: 100%;
   position: sticky;
-  padding:8px;
+  padding:6px;
   top: 0;
   z-index: 50;
-  width: 100%;
   background-color: #222;
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
@@ -100,12 +99,16 @@ async function logout() {
 
 
 .main-header__left {
-  margin-right: 16px;
   display: flex;
   align-items: center;
   gap: 24px;
 }
 
+.main-header__right{
+  margin-left: 16px;
+  display: flex;
+  align-items: center;
+}
 
 .main-nav {
   display: flex;
