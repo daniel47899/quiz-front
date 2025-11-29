@@ -286,7 +286,7 @@ onMounted(async () => {
 .option-item {
   display: flex;
   align-items: center;
-  background: #333;
+  background: #444;
   padding: 15px 18px;
   border-radius: 14px;
   border: 2px solid transparent;
@@ -301,7 +301,7 @@ onMounted(async () => {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #f4efe9;
+  background: #333;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -311,6 +311,7 @@ onMounted(async () => {
 .option-info {
   margin-left: 12px;
   text-align: left;
+  color: #fff;
 }
 
 .footer {
