@@ -15,7 +15,7 @@ function medalha(pos) {
 
 onMounted(async () => {
   try {
-    const resposta = await axios.get("http://http://127.0.0.1:8000/", {
+    const resposta = await axios.get("http://localhost:8000/api/ranking", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -54,7 +54,7 @@ onMounted(async () => {
           <td>{{ user.score }} pt</td>
 
           <td class="tempo">
-            ⏱ {{ user.time }}
+            ⏱ {{ user.total_time }}s
           </td>
         </tr>
       </tbody>
