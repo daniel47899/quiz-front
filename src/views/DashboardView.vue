@@ -72,7 +72,7 @@ function iniciarQuiz() {
 
 <style scoped>
 .dashboard-container {
-  margin-top: 120px;
+  margin-top: 75px;
   text-align: center;
   color: white;
 }

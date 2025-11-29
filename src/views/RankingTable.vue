@@ -45,10 +45,10 @@ onMounted(async () => {
       </thead>
 
       <tbody>
-        <tr v-for="(user, index) in dados" :key="user.id">
+        <tr v-for="(user, index) in dados.slice(0, 4)" :key="user.id">
           <td class="user-cell">
             <span class="medal">{{ medalha(index + 1) }}</span>
-            <span>{{ user.name }}</span> 
+            <span>{{ user.user.name }}</span> 
           </td>
 
           <td>{{ user.score }} pt</td>
@@ -117,7 +117,7 @@ td {
 }
 
 tr:hover {
-  background: #fafafa;
+  background: #333;
 }
 
 .tempo {

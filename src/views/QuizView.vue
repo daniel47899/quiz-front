@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue"
 import axios from "axios"
 
-// ESTADOS
+
 const question = ref(null)
 const loading = ref(true)
 const error = ref(null)
@@ -15,7 +15,7 @@ const allQuestions = ref([])
 const currentQuestionIndex = ref(0)
 const startTime = ref(null)
 
-// ROTAS API
+ 
 const API_URL_START = "http://localhost:8000/api/quiz/start"
 const API_URL_ANSWER = (id) => `http://localhost:8000/api/quiz/${id}/answer`
 const API_URL_FINISH = (id) => `http://localhost:8000/api/quiz/${id}/finish`
@@ -165,8 +165,13 @@ onMounted(async () => {
   <div class="quiz-container">
 
     <header class="header">
-      <h2 class="quiz-title">Quiz</h2>
+      <h2 class="quiz-title">Scoop - Conhecimentos Gerais</h2>
     </header>
+
+
+    <div v-if="!loading && question" class="progress-text">
+      {{ currentQuestionIndex + 1 }}/{{ allQuestions.length }}
+    </div>
 
     <main class="main">
 
@@ -219,10 +224,11 @@ onMounted(async () => {
   </div>
 </template>
 
+
 <style scoped>
 .quiz-container {
   min-height: 100vh;
-  background: #f2ede7;
+  background: #222;
   display: flex;
   flex-direction: column;
 }
@@ -242,7 +248,7 @@ onMounted(async () => {
 
 .loading {
   font-size: 18px;
-  color: #666;
+  color: #E0DD7A;
 }
 
 .error-message {
@@ -261,7 +267,13 @@ onMounted(async () => {
 .question-title {
   font-size: 22px;
   font-weight: bold;
-  color: #0b1b52;
+  color: #E0DD7A;
+}
+
+.quiz-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
 }
 
 .options-list {
@@ -274,7 +286,7 @@ onMounted(async () => {
 .option-item {
   display: flex;
   align-items: center;
-  background: white;
+  background: #333;
   padding: 15px 18px;
   border-radius: 14px;
   border: 2px solid transparent;
@@ -282,7 +294,7 @@ onMounted(async () => {
 }
 
 .option-item.selected {
-  border-color: #2c62f5;
+  border-color: #4C5DAA;
 }
 
 .option-letter {
@@ -302,15 +314,22 @@ onMounted(async () => {
 }
 
 .footer {
-  background: white;
+  background: #111;
   padding: 20px;
   display: flex;
   justify-content: center;
 }
 
+.progress-text {
+  text-align: center;
+  font-weight: bold;
+  color: #4C5DAA;
+  margin-bottom: 10px;
+}
+
 .continue-btn {
   padding: 12px 24px;
-  background: #cfcfcf;
+  background: #E0DD7A;
   border-radius: 10px;
   border: none;
   font-weight: bold;
@@ -318,7 +337,7 @@ onMounted(async () => {
 }
 
 .continue-btn.active {
-  background: #2c62f5;
+  background: #4C5DAA;
   color: white;
   cursor: pointer;
 }
