@@ -23,6 +23,10 @@
   function goToRegister() {
     router.push("/register");
   }
+
+  function goToResults() {
+    router.push('/results')
+  }
   </script>
 
   
@@ -76,6 +80,13 @@
   .navigation button:hover {
     background-color: #444;
     color: white;
+  }
+
+  /* Small screens - reduce header footprint */
+  @media (max-width: 487px) {
+    .header { padding: 10px 12px; }
+    .logo { width: 96px; height: auto; }
+    .navigation button { padding: 6px 10px; margin-left: 6px; font-size: 12px; }
   }
   </style>
   
