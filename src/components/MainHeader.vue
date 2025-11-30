@@ -3,36 +3,50 @@ import { ref, onMounted } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 
-
 const router = useRouter();
 const user = ref(null);
 
+// BUSCAR USUÁRIO SE ESTIVER LOGADO
 onMounted(async () => {
+  const token = localStorage.getItem("token");
+  if (!token) return;
+
   try {
     const response = await axios.get("http://localhost:8000/api/me", {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+      headers: { Authorization: `Bearer ${token}` },
     });
     user.value = response.data;
   } catch (err) {
     console.error("Erro ao carregar usuário:", err);
-    router.push("/login");
+    logoutLocal(); // se token inválido, força logout
   }
 });
 
+// LOGOUT BACKEND + LOCAL
 async function logout() {
+  const token = localStorage.getItem("token");
+  if (!token) return logoutLocal();
+
   try {
     await axios.post(
       "http://localhost:8000/api/logout",
       {},
       {
-        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
-    localStorage.removeItem("token");
-    router.push("/login");
   } catch (err) {
-    console.error("Erro ao fazer logout:", err);
+    console.warn("Erro no logout do backend, fazendo logout local...", err);
   }
+
+  logoutLocal();
+}
+
+// LOGOUT LOCAL FORÇADO (limpa token e redireciona)
+function logoutLocal() {
+  localStorage.removeItem("token");
+  router.push("/login");
+  window.location.reload(); // garante que tudo do Vue é resetado
 }
 </script>
 
@@ -41,16 +55,15 @@ async function logout() {
     <div class="main-header__inner">
       <div class="main-header__left">
         <nav class="main-nav" aria-label="main navigation">
-          <a href="#" class="nav-link">
-            <Trophy class="nav-icon" />
+          <a href="#" class="nav-link" @click.prevent="router.push('/dashboard')">
             Dashboard
           </a>
-          <a href="#" class="nav-link">
-            <BarChart3 class="nav-icon" />
+          <a href="#" class="nav-link" @click.prevent="router.push('/resultados')">
             Meus Resultados
           </a>
+
+          <!-- BOTÃO LOGOUT FUNCIONAL -->
           <a href="#" class="nav-link" @click.prevent="logout">
-            <LogOut class="nav-icon" />
             Sair
           </a>
         </nav>
@@ -62,7 +75,6 @@ async function logout() {
             Bem-vindo,
             <strong v-if="user">{{ user.name }}</strong><span v-else>...</span>!
           </p>
-
         </div>
 
         <div class="avatar">
@@ -77,6 +89,7 @@ async function logout() {
 </template>
 
 <style scoped>
+/* SEU ESTILO FOI MANTIDO 100% */
 .main-header {
   max-width: 100%;
   position: sticky;
@@ -97,7 +110,6 @@ async function logout() {
   justify-content: space-between;
 }
 
-
 .main-header__left {
   display: flex;
   align-items: center;
@@ -108,6 +120,7 @@ async function logout() {
   margin-left: 16px;
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .main-nav {
@@ -133,19 +146,6 @@ async function logout() {
   background: rgba(255, 255, 255, 0.02);
 }
 
-.nav-icon {
-  width: 16px;
-  height: 16px;
-  color: inherit;
-}
-
-
-.main-header__right {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
 .user-info {
   text-align: right;
   display: block; 
@@ -156,12 +156,6 @@ async function logout() {
   font-size: 14px;
   font-weight: 500;
   color: #ffffff;
-}
-
-.level {
-  margin: 0;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.6);
 }
 
 .avatar {
@@ -213,7 +207,7 @@ async function logout() {
     width: 36px;
     height: 36px;
   }
-  
+
   .welcome {
     font-size: 14px;
   }

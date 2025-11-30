@@ -15,7 +15,7 @@ function medalha(pos) {
 
 onMounted(async () => {
   try {
-    const resposta = await axios.get("http://http://127.0.0.1:8000/", {
+    const resposta = await axios.get("http://localhost:8000/api/ranking", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -45,16 +45,16 @@ onMounted(async () => {
       </thead>
 
       <tbody>
-        <tr v-for="(user, index) in dados" :key="user.id">
+        <tr v-for="(user, index) in dados.slice(0, 4)" :key="user.id">
           <td class="user-cell">
             <span class="medal">{{ medalha(index + 1) }}</span>
-            <span>{{ user.name }}</span> 
+            <span>{{ user.user.name }}</span> 
           </td>
 
           <td>{{ user.score }} pt</td>
 
           <td class="tempo">
-            ⏱ {{ user.time }}
+            ⏱ {{ user.total_time }}s
           </td>
         </tr>
       </tbody>
@@ -117,7 +117,7 @@ td {
 }
 
 tr:hover {
-  background: #fafafa;
+  background: #333;
 }
 
 .tempo {
