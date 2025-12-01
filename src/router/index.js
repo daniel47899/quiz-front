@@ -40,6 +40,24 @@ const router = createRouter({
       component: () => import('../views/QuizView.vue'),
       meta: { requiresAuth: true }
     },
+
+    {path: '/results',
+     name: 'results',
+     component: () => import('../views/ResultsView.vue'),
+     meta: { requiresAuth: true }
+    },
+
+    {path: '/QuizIntroView',
+      name: 'QuizIntroView',
+      component: () => import('../views/QuizIntroView.vue'),
+      meta: { requiresAuth: true }
+    },
+
+    {path: '/FinalResultsView',
+      name: 'FinalResultsView',
+      component: () => import('../views/FinalResultsView.vue'),
+      meta: { requiresAuth: true }
+    },
   ],
 })
 

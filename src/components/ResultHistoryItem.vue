@@ -1,18 +1,20 @@
 <template>
-  <div class="history-item">
+  <div class="history-item" role="listitem" aria-label="Histórico de quiz">
     <div class="item-left">
+      <div class="quiz-name">{{ item.name }}</div>
 
       <div class="meta-row">
-
-        <span class="meta"><strong></strong> {{ item.name }}</span>
         <span class="meta"><strong>Pontuação:</strong> {{ item.score }}</span>
         <span class="meta"><strong>Acertos:</strong> {{ item.correct }}</span>
         <span class="meta"><strong>Erros:</strong> {{ item.wrong }}</span>
         <span class="meta"><strong>Tempo Total:</strong> {{ item.time }}</span>
         <span class="meta"><strong>Realizado:</strong> {{ item.date }}</span>
-
       </div>
+    </div>
 
+    <div class="item-right" v-if="item.extra">
+     
+      {{ item.extra }}
     </div>
   </div>
 </template>
@@ -27,101 +29,73 @@ defineProps({
 </script>
 
 <style scoped>
+/* Força cores legíveis, mesmo que existam variáveis CSS ausentes */
 .history-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: var(--vt-c-white);
-  border-radius: 8px;
-  padding: 10px 14px;
-  min-height: 56px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  background: #ffffff !important;        /* fundo claro para contraste */
+  color: #111111 !important;             /* texto escuro */
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-height: 64px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   width: 100%;
-  color: #000 !important; 
+  border: 1px solid rgba(0,0,0,0.06);
+  opacity: 1 !important;                 /* garante opacidade total */
+  filter: none !important;               /* remove filtros aplicados externamente */
+  mix-blend-mode: normal !important;     /* evita blend com fundo */
+  z-index: 999 !important;               /* garante estar acima de overlays */
+  position: relative;
 }
 
+/* Conteúdo */
 .item-left {
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-/* Nome do Quiz */
 .quiz-name {
   font-weight: 700;
-  font-size: 14px;
-  color: #000 !important;
+  font-size: 15px;
+  color: #111111 !important;
 }
 
 /* Linha com Pontuação / Acertos / Erros / Tempo / Realizado */
 .meta-row {
   display: flex;
-  flex-direction: row;       /* força ficar lado a lado */
-  flex-wrap: wrap;           /* quebra somente se precisar */
-  gap: 16px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 12px;
   font-size: 13px;
-  color: #000 !important;    /* cor igual para todos */
-  width: 100%;
+  color: #333333 !important;
 }
 
-/* Cada item individual (Pontuação, Acertos, etc.) */
 .meta {
-  color: #000 !important;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
+  background: rgba(0,0,0,0.02);
+  padding: 6px 8px;
+  border-radius: 6px;
+  color: #333333 !important;
 }
 
-.meta strong {
-  color: #000 !important;
-}
+.meta strong { color: #111111 !important; }
 
-/* Parte direita caso exista */
+
 .item-right {
   text-align: right;
   font-size: 13px;
-  color: #000 !important;
-  min-width: 160px;
+  color: #333333 !important;
+  min-width: 120px;
 }
 
 /* Responsivo */
 @media (max-width: 640px) {
-  .history-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-
-  .item-right {
-    text-align: left;
-  }
+  .history-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .item-right { text-align: left; }
 }
 
-/* Telas muito pequenas */
-@media (max-width: 487px) {
-  .history-item {
-    padding: 10px 12px;
-    border-radius: 8px;
-    gap: 6px;
-  }
-
-  .quiz-name {
-    font-size: 14px;
-  }
-
-  .meta-row {
-    gap: 8px;
-    font-size: 12px;
-    flex-wrap: wrap;
-  }
-
-  .meta {
-    display: inline-block;
-    min-width: 70px;
-  }
-
-  .item-right {
-    font-size: 12px;
-  }
-}
 </style>
