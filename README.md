@@ -1,38 +1,27 @@
-# quiz-front
+Quiz Front — Instalação e Execução
 
-This template should help get you started developing with Vue 3 in Vite.
+Este é o frontend do projeto Quiz, desenvolvido em Vue 3 + Vite.
 
-## Recommended IDE Setup
+🚀 Como rodar o projeto
+1️⃣ Clonar o repositório
+git clone https://github.com/daniel47899/quiz-front.git
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+2️⃣ Entrar na pasta do projeto
+cd quiz-front
 
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+3️⃣ Instalar as dependências
 npm install
-```
 
-### Compile and Hot-Reload for Development
 
-```sh
+(O Axios já está incluído no projeto, não é necessário instalar manualmente.)
+
+4️⃣ Rodar em modo de desenvolvimento
 npm run dev
-```
 
-### Compile and Minify for Production
 
-```sh
-npm run build
-```
+O Vite fornecerá um link semelhante a:
+
+http://localhost:5173
+
+
+Abra no navegador.

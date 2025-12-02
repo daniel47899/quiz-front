@@ -1,29 +1,33 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import axios from "axios";
-import { useRouter } from "vue-router";
+import { ref, onMounted } from "vue"
+import axios from "axios"
+import { useRouter } from "vue-router"
 
-const router = useRouter();
-const user = ref(null);
+import MainHeader from "@/components/MainHeader.vue"
+import RankingTable from "./RankingTable.vue"
+import PrimaryBtn from "@/components/PrimaryBtn.vue"
 
-// Buscar dados do usuário logado
+const router = useRouter()
+const user = ref(null)
+
+// BUSCAR USUÁRIO
 onMounted(async () => {
   try {
     const response = await axios.get("http://localhost:8000/api/me", {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
-    });
+    })
 
-    user.value = response.data;
+    user.value = response.data
 
   } catch (error) {
-    console.error("Erro ao carregar usuário:", error);
-    router.push("/login");
+    console.error("Erro ao carregar usuário:", error)
+    router.push("/login")
   }
-});
+})
 
-// Logout
+// LOGOUT
 async function logout() {
   try {
     await axios.post(
@@ -34,34 +38,41 @@ async function logout() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
-    );
+    )
 
-    localStorage.removeItem("token");
-    router.push("/login");
+    localStorage.removeItem("token")
+    router.push("/login")
 
   } catch (error) {
-    console.error("Erro ao fazer logout:", error);
+    console.error("Erro ao fazer logout:", error)
   }
+}
+
+function iniciarQuiz() {
+  router.push("/quiz")
 }
 </script>
 
 <template>
-  <div class="dashboard-container">
-    <h1>Dashboard</h1>
+  <MainHeader />
 
-    <p v-if="user">Bem-vindo, <strong>{{ user.name }}</strong>!</p>
+  <div class="dashboard-container">
+
+    <RankingTable />
 
     <div class="options">
-      <button @click="router.push('/quiz')">Iniciar Quiz</button>
-      <button @click="router.push('/ranking')">Ver Ranking</button>
-      <button class="logout" @click="logout">Logout</button>
+      <PrimaryBtn @click="iniciarQuiz">
+        Iniciar Quiz
+      </PrimaryBtn>
     </div>
+
   </div>
 </template>
 
+
 <style scoped>
 .dashboard-container {
-  margin-top: 120px;
+  margin-top: 75px;
   text-align: center;
   color: white;
 }
