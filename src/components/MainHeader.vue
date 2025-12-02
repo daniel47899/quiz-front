@@ -58,7 +58,7 @@ function logoutLocal() {
           <a href="#" class="nav-link" @click.prevent="router.push('/dashboard')">
             Dashboard
           </a>
-          <a href="#" class="nav-link" @click.prevent="router.push('/resultados')">
+          <a href="#" class="nav-link" @click.prevent="router.push('/results')">
             Meus Resultados
           </a>
 

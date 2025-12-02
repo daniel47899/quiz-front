@@ -1,7 +1,9 @@
 <script setup>
 import { ref, onMounted } from "vue"
 import axios from "axios"
+import { useRouter } from "vue-router"   
 
+const router = useRouter()               
 
 const question = ref(null)
 const loading = ref(true)
@@ -15,7 +17,7 @@ const allQuestions = ref([])
 const currentQuestionIndex = ref(0)
 const startTime = ref(null)
 
- 
+
 const API_URL_START = "http://localhost:8000/api/quiz/start"
 const API_URL_ANSWER = (id) => `http://localhost:8000/api/quiz/${id}/answer`
 const API_URL_FINISH = (id) => `http://localhost:8000/api/quiz/${id}/finish`
@@ -32,7 +34,6 @@ async function normalizeQuestions(rawQuestions) {
 
     if (Array.isArray(q.options) && q.options.length) return q
 
- 
     if (q.option_a || q.option_b || q.option_c || q.option_d) {
       q.options = [
         { id: `${q.id}-A`, letter: 'A', label: q.option_a ?? '' },
@@ -60,7 +61,6 @@ async function normalizeQuestions(rawQuestions) {
         return q
       }
     } catch (err) {
-
       console.warn(`Não foi possível buscar opções da pergunta ${q.id}:`, err?.response?.status || err.message)
     }
 
@@ -114,12 +114,20 @@ const finishQuiz = async () => {
       authHeader
     )
 
-    alert(
-      `Quiz Finalizado!\n` +
-      `Corretas: ${response.data.quiz.correct_answers}\n` +
-      `Pontuação: ${response.data.quiz.score}\n` +
-      `Tempo: ${totalTime}s`
+    // Salvar resultado
+    localStorage.setItem(
+      "last_result",
+      JSON.stringify({
+        score: response.data.quiz.score,
+        correct: response.data.quiz.correct_answers,
+        wrong: response.data.quiz.wrong_answers,
+        time: `${totalTime}s`,
+        date: new Date().toLocaleDateString("pt-BR")
+      })
     )
+
+    
+    router.push('/FinalResultsView')
 
   } catch (errorReq) {
     console.error("Erro ao finalizar:", errorReq)
@@ -135,26 +143,15 @@ onMounted(async () => {
     quizId.value = response.data.quiz_id
     const raw = response.data.questions ?? []
 
- 
     const normalized = await normalizeQuestions(raw)
     allQuestions.value = normalized
     question.value = allQuestions.value[0] ?? null
-
-
-    const noOptions = allQuestions.value.filter(q => !(Array.isArray(q.options) && q.options.length))
-    if (noOptions.length) {
-      console.warn("Algumas perguntas vieram sem opções:", noOptions.map(q=>q.id))
-      error.value = "Algumas perguntas não possuem opções. Verifique o backend."
-    } else {
-      error.value = null
-    }
 
     startTime.value = Date.now()
 
   } catch (err) {
     console.error("Erro ao iniciar quiz:", err)
     error.value = err.response?.data?.message || err.message || "Erro ao iniciar o quiz"
-    alert("Erro ao iniciar o quiz")
   } finally {
     loading.value = false
   }
@@ -167,7 +164,6 @@ onMounted(async () => {
     <header class="header">
       <h2 class="quiz-title">Scoop - Conhecimentos Gerais</h2>
     </header>
-
 
     <div v-if="!loading && question" class="progress-text">
       {{ currentQuestionIndex + 1 }}/{{ allQuestions.length }}
@@ -211,21 +207,22 @@ onMounted(async () => {
     </main>
 
     <footer class="footer">
-      <button
-        class="continue-btn"
-        :class="{ active: selectedOptionId }"
-        :disabled="!selectedOptionId"
-        @click="continueQuiz"
-      >
-        CONTINUAR
-      </button>
-    </footer>
+  <button
+    class="continue-btn"
+    :class="{ active: selectedOptionId }"
+    :disabled="!selectedOptionId"
+    @click="continueQuiz"
+  >
+    {{ currentQuestionIndex + 1 === allQuestions.length ? "FINALIZAR" : "CONTINUAR" }}
+  </button>
+</footer>
+
 
   </div>
 </template>
 
-
 <style scoped>
+
 .quiz-container {
   min-height: 100vh;
   background: #222;

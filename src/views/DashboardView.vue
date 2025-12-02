@@ -48,8 +48,9 @@ async function logout() {
   }
 }
 
+
 function iniciarQuiz() {
-  router.push("/quiz")
+  router.push("/QuizIntroView")
 }
 </script>
 
@@ -68,7 +69,6 @@ function iniciarQuiz() {
 
   </div>
 </template>
-
 
 <style scoped>
 .dashboard-container {
