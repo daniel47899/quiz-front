@@ -3,8 +3,6 @@
     <MainHeader />
 
     <div class="page-inner">
-      
-
       <div class="content">
         <h1 class="page-title">Meus Resultados</h1>
 
@@ -31,18 +29,10 @@ import MainHeader from "@/components/MainHeader.vue"
 import ResultHistoryItem from '@/components/ResultHistoryItem.vue'
 
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 import axios from "axios"
 
-const router = useRouter()
-
-const userName = ref("Usuário")
 const items = ref([])
 const carregando = ref(true)
-
-function goBack() {
-  router.back()
-}
 
 onMounted(async () => {
   try {
@@ -52,18 +42,13 @@ onMounted(async () => {
       },
     })
 
-    
-    if (resposta.data.user) {
-      userName.value = resposta.data.user.name
-    }
-
     items.value = resposta.data.quizzes.map(q => ({
-      name: q.quiz_name ?? "Quiz",
+      name: "Quiz - Conhecimentos Gerais",
       score: q.score ?? 0,
       correct: q.correct_answers ?? 0,
       wrong: q.wrong_answers ?? 0,
-      time: q.time ?? "0s",
-      date: new Date(q.created_at).toLocaleDateString("pt-BR"),
+      time: `${q.total_time}s`, 
+      date: new Date(q.created_at).toLocaleDateString("pt-BR"), 
     }))
 
   } catch (e) {
@@ -85,22 +70,6 @@ onMounted(async () => {
   max-width: 1200px;
   margin: 0 auto;
 }
-
-.back {
-  background: transparent;
-  border: none;
-  color: var(--color-text);
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.greeting { font-size: 18px; }
 
 .content { margin-top: 12px; }
 
