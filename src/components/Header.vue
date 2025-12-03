@@ -36,7 +36,7 @@
 @import url('https://fonts.cdnfonts.com/css/trafit-personal-use');
 
   .header {
-    position: fixed; /* Fica no topo */
+    position: fixed; 
     top: 0;
     left: 0;
     width: 100%;
@@ -82,7 +82,7 @@
     color: white;
   }
 
-  /* Small screens - reduce header footprint */
+  
   @media (max-width: 487px) {
     .header { padding: 10px 12px; }
     .logo { width: 96px; height: auto; }

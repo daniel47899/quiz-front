@@ -29,23 +29,23 @@ defineProps({
 </script>
 
 <style scoped>
-/* Força cores legíveis, mesmo que existam variáveis CSS ausentes */
+
 .history-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ffffff !important;        /* fundo claro para contraste */
-  color: #111111 !important;             /* texto escuro */
+  background: #ffffff !important;        
+  color: #111111 !important;             
   border-radius: 10px;
   padding: 14px 16px;
   min-height: 64px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.25);
   width: 100%;
   border: 1px solid rgba(0,0,0,0.06);
-  opacity: 1 !important;                 /* garante opacidade total */
-  filter: none !important;               /* remove filtros aplicados externamente */
-  mix-blend-mode: normal !important;     /* evita blend com fundo */
-  z-index: 999 !important;               /* garante estar acima de overlays */
+  opacity: 1 !important;                 
+  filter: none !important;               
+  mix-blend-mode: normal !important;     
+  z-index: 999 !important;               
   position: relative;
 }
 
@@ -62,7 +62,7 @@ defineProps({
   color: #111111 !important;
 }
 
-/* Linha com Pontuação / Acertos / Erros / Tempo / Realizado */
+
 .meta-row {
   display: flex;
   flex-direction: row;

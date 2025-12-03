@@ -52,7 +52,7 @@ onMounted(async () => {
       },
     })
 
-    // se a rota /me estiver retornando nome do usuário no history()
+    
     if (resposta.data.user) {
       userName.value = resposta.data.user.name
     }

@@ -21,10 +21,10 @@ const login = async () => {
       password: password.value
     })
 
-    // Salvar token
+    
     localStorage.setItem('token', response.data.token)
 
-    // Redirecionar
+    
     router.push('/dashboard')
 
   } catch (err) {

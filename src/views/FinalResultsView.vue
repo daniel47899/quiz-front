@@ -3,10 +3,10 @@
 
     <MainHeader />
 
-    <!-- Título dinâmico -->
+    
     <h1 class="title">{{ resultMessage }}</h1>
 
-    <!-- Card central -->
+    
     <div class="result-card">
       <h2 class="player-name">{{ result.user }}</h2>
 
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <!-- Botões -->
+    
     <div class="buttons">
       <button class="gradient-btn" @click="retry">Tentar Novamente</button>
       <button class="gradient-btn" @click="goToHistory">Ver Histórico</button>
@@ -35,7 +35,7 @@ import { useRouter } from "vue-router"
 
 const router = useRouter()
 
-// Estado que receberá o resultado do backend
+
 const result = ref({
   user: "",
   score: 0,
@@ -45,7 +45,7 @@ const result = ref({
   date: ""
 })
 
-// 🔥 Mensagem dinâmica baseada no score
+
 const resultMessage = computed(() => {
   if (result.value.score >=  8) return "Parabéns!"
   if (result.value.score <= 6 && result.value.score >= 4) return "Quase lá!"
@@ -54,11 +54,11 @@ const resultMessage = computed(() => {
 })
 
 onMounted(() => {
-  // Carregar dados vindos do backend
+  
   const saved = localStorage.getItem("last_result")
 
   if (!saved) {
-    return router.push("/dashboard") // caso entre direto sem fazer quiz
+    return router.push("/dashboard") 
   }
 
   result.value = JSON.parse(saved)
@@ -78,7 +78,7 @@ function goToHistory() {
 </script>
 
 <style scoped>
-/* --- SEU CSS ORIGINAL COMPLETO --- */
+
 .result-page {
   background: transparent;
   min-height: 100vh;

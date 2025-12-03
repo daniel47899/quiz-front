@@ -10,7 +10,7 @@ import PrimaryBtn from "@/components/PrimaryBtn.vue"
 const router = useRouter()
 const user = ref(null)
 
-// BUSCAR USUÁRIO
+
 onMounted(async () => {
   try {
     const response = await axios.get("http://localhost:8000/api/me", {
@@ -27,7 +27,7 @@ onMounted(async () => {
   }
 })
 
-// LOGOUT
+
 async function logout() {
   try {
     await axios.post(

@@ -6,7 +6,7 @@ import { useRouter } from "vue-router";
 const router = useRouter();
 const user = ref(null);
 
-// BUSCAR USUÁRIO SE ESTIVER LOGADO
+
 onMounted(async () => {
   const token = localStorage.getItem("token");
   if (!token) return;
@@ -22,7 +22,7 @@ onMounted(async () => {
   }
 });
 
-// LOGOUT BACKEND + LOCAL
+
 async function logout() {
   const token = localStorage.getItem("token");
   if (!token) return logoutLocal();
@@ -42,11 +42,11 @@ async function logout() {
   logoutLocal();
 }
 
-// LOGOUT LOCAL FORÇADO (limpa token e redireciona)
+
 function logoutLocal() {
   localStorage.removeItem("token");
   router.push("/login");
-  window.location.reload(); // garante que tudo do Vue é resetado
+  window.location.reload(); 
 }
 </script>
 
@@ -62,7 +62,7 @@ function logoutLocal() {
             Meus Resultados
           </a>
 
-          <!-- BOTÃO LOGOUT FUNCIONAL -->
+          
           <a href="#" class="nav-link" @click.prevent="logout">
             Sair
           </a>
@@ -89,7 +89,7 @@ function logoutLocal() {
 </template>
 
 <style scoped>
-/* SEU ESTILO FOI MANTIDO 100% */
+
 .main-header {
   max-width: 100%;
   position: sticky;
