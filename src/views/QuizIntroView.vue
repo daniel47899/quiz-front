@@ -1,10 +1,10 @@
 <template>
   <div class="quiz-intro-container">
 
-    <!-- LOGO -->
+    
     <h1 class="logo">Scoop</h1>
 
-    <!-- CARD -->
+    
     <div class="card">
       <h2 class="quiz-title">Regras do Quiz</h2>
 
@@ -41,7 +41,7 @@ function startQuiz() {
 </script>
 
 <style scoped>
-/* Fundo geral */
+
 .quiz-intro-container {
   background: transparent;
   min-height: 100vh;
@@ -52,7 +52,7 @@ function startQuiz() {
   align-items: center;
 }
 
-/* Logo */
+
 .logo {
   font-size: 64px;
   font-weight: bold;
@@ -67,7 +67,7 @@ function startQuiz() {
   color: #8f9bff;
 }
 
-/* Card principal */
+
 .card {
   background: #333;
   width: 85%;
@@ -81,7 +81,7 @@ function startQuiz() {
   text-align: left;
 }
 
-/* Título dentro do card */
+
 .quiz-title {
   text-align: center;
   font-size: 32px;
@@ -89,7 +89,7 @@ function startQuiz() {
   color: #ffffff;
 }
 
-/* Textos */
+
 .quiz-info {
   list-style: disc;
   margin-left: 20px;
@@ -98,7 +98,7 @@ function startQuiz() {
   color: #ffffff;
 }
 
-/* Botão */
+
 .start-btn {
   padding: 12px 24px;
   background: #E0DD7A;

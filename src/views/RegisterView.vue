@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import axios from "axios";
-import { useRouter } from "vue-router"; // ← IMPORTANTE
+import { useRouter } from "vue-router"; 
 
 const router = useRouter();
 
@@ -18,7 +18,7 @@ async function registerUser() {
   successMessage.value = "";
 
   try {
-    // 1️⃣ REGISTRA O USUÁRIO
+    
     await axios.post("http://localhost:8000/api/register", {
       name: name.value,
       email: email.value,
@@ -26,7 +26,7 @@ async function registerUser() {
       password_confirmation: password_confirmation.value,
     });
 
-    // 2️⃣ LOGIN AUTOMÁTICO APÓS REGISTRAR
+    
     const loginResponse = await axios.post(
       "http://localhost:8000/api/login",
       {
@@ -35,10 +35,10 @@ async function registerUser() {
       }
     );
 
-    // 3️⃣ SALVAR TOKEN
+    
     localStorage.setItem("token", loginResponse.data.token);
 
-    // 4️⃣ REDIRECIONAR PARA DASHBOARD
+    
     router.push("/dashboard");
 
     successMessage.value = "Conta criada com sucesso!";

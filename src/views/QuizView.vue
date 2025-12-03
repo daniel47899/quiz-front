@@ -114,7 +114,7 @@ const finishQuiz = async () => {
       authHeader
     )
 
-    // Salvar resultado
+    
     localStorage.setItem(
       "last_result",
       JSON.stringify({

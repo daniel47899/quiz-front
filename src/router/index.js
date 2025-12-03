@@ -62,18 +62,16 @@ const router = createRouter({
 })
 
 
-// ==========================
-// 🔐 MIDDLEWARE DE AUTENTICAÇÃO (versão correta)
-// ==========================
+
 router.beforeEach((to) => {
   const token = localStorage.getItem('token')
 
-  // Se rota for protegida e não tiver token → manda pro login
+  
   if (to.meta.requiresAuth && !token) {
     return { name: 'login' }
   }
 
-  // Se já estiver logado, não deixa acessar login/register
+  
   if ((to.name === 'login' || to.name === 'register') && token) {
     return { name: 'dashboard' }
   }
